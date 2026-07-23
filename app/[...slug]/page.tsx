@@ -86,6 +86,16 @@ const process = [
   ["Follow-up", "Maintain context and coordinate appropriate continuity after the journey."],
 ];
 
+export function generateStaticParams() {
+  return [
+    ...Object.keys(journeys),
+    ...Object.keys(legal),
+    "about",
+    "how-it-works",
+    "private-enquiries",
+  ].map((path) => ({ slug: path.split("/") }));
+}
+
 function InnerHero({ data }: { data: PageData }) {
   return <section className={`innerHero ${data.image ? "imageHero" : ""}`}>{data.image && <Image src={data.image} alt="" fill priority sizes="100vw" />}<div className="innerShade" /><Header light={!!data.image} /><div className="wrap innerHeroContent"><Label>{data.eyebrow}</Label><h1>{data.title}</h1>{data.intro && <p>{data.intro}</p>}</div></section>;
 }
