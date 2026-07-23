@@ -3,30 +3,23 @@ import type { ReactNode } from "react";
 
 export function Header({ light = false }: { light?: boolean }) {
   return (
-    <header className={`header ${light ? "headerLight" : ""}`}>
-      <div className="headerInner wrap">
-        <Link className="brand" href="/">CALYX <i>PRIVÉ</i></Link>
-        <nav aria-label="Primary navigation">
-          <Link href="/">Home</Link>
-          <div className="journeyMenu">
-            <Link
-              className="journeyTrigger"
-              href="/#journey"
-              aria-haspopup="true"
-            >
-              The Journey
-            </Link>
-            <div className="journeyDropdown">
+    <header className="site-header">
+      <Link className="wordmark" href="/">CALYX <em>PRIVÉ</em></Link>
+      <nav aria-label="Primary navigation">
+        <Link href="/">Home</Link>
+        <details>
+          <summary>The Journey</summary>
+          <div>
               <Link href="/journey/health-wellbeing">Health &amp; Wellbeing</Link>
               <Link href="/journey/technology-innovation">Technology &amp; Innovation</Link>
               <Link href="/journey/culture-lifestyle">Culture &amp; Lifestyle</Link>
               <Link href="/journey/relationships-opportunities">Relationships &amp; Opportunities</Link>
-            </div>
           </div>
-          <Link href="/how-it-works">How It Works</Link><Link href="/about">About</Link>
-          <Link className="navButton" href="/private-enquiries">Private Enquiries</Link>
-        </nav>
-      </div>
+        </details>
+        <Link href="/how-it-works">How It Works</Link>
+        <Link href="/about">About</Link>
+        <Link className="nav-cta" href="/private-enquiries">Private Enquiries</Link>
+      </nav>
     </header>
   );
 }
@@ -40,5 +33,5 @@ export function SplitSection({ label, title, children, dark = false, className =
 }
 
 export function Footer() {
-  return <footer><div className="wrap footerGrid"><div><Link className="brand" href="/">CALYX <i>PRIVÉ</i></Link><p>A deeper way into China.</p><a href="mailto:concierge@calyx.global">concierge@calyx.global</a><a href="https://www.calyxprive.com">www.calyxprive.com</a></div><div><p>China · The Gulf · Africa · Beyond</p><Link href="/#journey">The Journey</Link><Link href="/about">About</Link><Link href="/privacy">Privacy Policy</Link></div><div><Link href="/how-it-works">How It Works</Link><Link href="/private-enquiries">Private Enquiries</Link><Link href="/terms">Terms & Disclaimer</Link></div></div><div className="wrap footerNote">Calyx Privé facilitates access and coordination. Regulated services remain the responsibility of appropriately licensed independent providers.</div></footer>;
+  return <footer><div className="wrap footer-grid"><div><Link className="wordmark" href="/">CALYX <em>PRIVÉ</em></Link><p>A deeper way into China.</p><a href="mailto:concierge@calyx.global">concierge@calyx.global</a><br /><a href="https://www.calyxprive.com">www.calyxprive.com</a></div><div><p>China · The Gulf · Africa · Beyond</p><div className="footer-links"><Link href="/#journey">The Journey</Link><Link href="/how-it-works">How It Works</Link><Link href="/about">About</Link><Link href="/private-enquiries">Private Enquiries</Link><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Terms &amp; Disclaimer</Link></div></div></div><div className="wrap footer-note">Calyx Privé facilitates access and coordination. Regulated services remain the responsibility of appropriately licensed independent providers.</div></footer>;
 }
