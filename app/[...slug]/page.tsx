@@ -1,13 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Footer, Header, Label } from "../site";
+import { Footer, Header } from "../site";
 
 type PageData = {
   eyebrow: string;
   title: string;
   intro?: string;
   image?: string;
+  alt?: string;
+  accent?: string;
+  disclaimer?: string;
   sections?: Array<{ title: string; text: string }>;
   items?: string[];
 };
@@ -18,6 +21,9 @@ const journeys: Record<string, PageData> = {
     title: "Health begins long before treatment.",
     intro: "A personally coordinated pathway through China’s medical and wellbeing landscape.",
     image: "/images/calyx-prive/health.png",
+    alt: "A calm private treatment setting in China",
+    accent: "A considered pathway can bring clinical access, practical coordination and restorative wellbeing into one coherent journey.",
+    disclaimer: "Calyx Privé facilitates access and coordinates the experience. Medical decisions remain between the client and licensed healthcare providers.",
     sections: [{ title: "A coordinated health and wellbeing journey.", text: "From preventative assessment and specialist access to restorative support and continuity, each element is selected around the client’s health needs, family context and preferred pace." }],
     items: ["Preventative assessments", "Hospital and specialist access", "Medical interpretation", "Travel and family coordination", "Traditional Chinese medicine", "Sleep, recovery and nutrition", "Private retreat settings", "Bilingual practical support", "Post-visit continuity"],
   },
@@ -26,6 +32,8 @@ const journeys: Record<string, PageData> = {
     title: "The future is already visible.",
     intro: "Private exposure to the people, companies and ecosystems shaping China’s next chapter.",
     image: "/images/calyx-prive/technology.png",
+    alt: "Advanced robotics within a Chinese manufacturing environment",
+    accent: "Every programme is shaped around the client’s interests, relevance and appropriate access.",
     sections: [{ title: "Private access to China’s innovation landscape.", text: "Meetings, company visits and expert conversations are curated around the client’s sectors, questions and strategic interests." }],
     items: ["Private company visits", "Expert conversations", "Research and innovation ecosystems", "Artificial intelligence and digital ecosystems", "Robotics and advanced manufacturing", "Mobility and clean technology", "Biotechnology and health technology", "Practical and cultural context"],
   },
@@ -34,6 +42,8 @@ const journeys: Record<string, PageData> = {
     title: "China is understood through experience.",
     intro: "A private journey into culture, place and contemporary life—designed with context and time.",
     image: "/images/calyx-prive/culture.png",
+    alt: "A contemporary cultural retreat in China",
+    accent: "Each experience is selected around the individual rather than assembled as a conventional itinerary.",
     sections: [{ title: "Culture revealed through place and participation.", text: "Private hospitality, contemporary culture, heritage, gastronomy and restorative travel are combined around the individual’s interests and rhythm." }],
     items: ["Art, architecture and heritage", "Design and contemporary culture", "Gastronomy and regional traditions", "Family and intergenerational discovery", "Private hospitality", "Restorative travel", "Thoughtful pacing and privacy", "Bilingual practical coordination", "Continuity throughout the journey"],
   },
@@ -42,6 +52,8 @@ const journeys: Record<string, PageData> = {
     title: "The right conversation can change a journey.",
     intro: "Introductions are shaped around relevance, mutual interest and permission—never volume.",
     image: "/images/calyx-prive/relationships.png",
+    alt: "A discreet contemporary lounge prepared for conversation",
+    accent: "Every introduction is selective, relevant and permission-based.",
     sections: [{ title: "Relevant relationships, introduced with care.", text: "Experts, institutions, entrepreneurs and private communities are approached selectively, with mutual relevance, discretion and permission." }],
     items: ["Experts and institutions", "Entrepreneurs and industry leaders", "Cultural and private communities", "Family and philanthropic networks", "Relevant hosted conversations", "Family and next-generation interests", "Occasional commercial opportunities"],
   },
@@ -57,7 +69,8 @@ const legal: Record<string, PageData> = {
       { title: "Consent and communications", text: "By submitting the form, you consent to being contacted in relation to your enquiry. You may withdraw communication consent by contacting concierge@calyx.global." },
       { title: "Confidentiality limitations", text: "While Calyx Privé treats enquiries discreetly, internet and email communications cannot be guaranteed to be completely secure. Information may also need to be shared where required by law." },
       { title: "Independent providers", text: "Where an engagement involves independent providers, their own privacy notices and professional obligations may apply." },
-      { title: "Retention and rights", text: "Information should be retained only for as long as reasonably necessary for the purpose collected and applicable legal requirements." },
+      { title: "Retention and rights", text: "Information should be retained only for as long as reasonably necessary for the purpose collected and applicable legal requirements. Applicable data-protection rights may include access, correction or deletion." },
+      { title: "Contact", text: "Questions concerning privacy may be sent to concierge@calyx.global." },
     ],
   },
   terms: {
@@ -65,11 +78,12 @@ const legal: Record<string, PageData> = {
     sections: [
       { title: "Website information", text: "Information on this website is general in nature and does not constitute medical, legal, financial, investment or other regulated professional advice." },
       { title: "Nature of the service", text: "Calyx Privé curates access, facilitates relationships and coordinates experiences. It is not a travel agency, healthcare provider, legal adviser, financial adviser or investment adviser." },
-      { title: "Independent providers", text: "Clinical, travel, legal, financial and other regulated services remain the responsibility of appropriately licensed independent providers." },
-      { title: "No guarantee of access", text: "All introductions and access are subject to relevance, availability, mutual interest, permission and the discretion of the relevant parties." },
+      { title: "Independent providers", text: "Clinical, travel, legal, financial and other regulated services remain the responsibility of appropriately licensed independent providers. Their terms, decisions and professional responsibilities are separate from Calyx Privé." },
+      { title: "No guarantee of access", text: "All introductions and access are subject to relevance, availability, mutual interest, permission and the discretion of the relevant parties. No specific access is guaranteed." },
       { title: "No guarantee of outcomes", text: "Calyx Privé does not guarantee medical, commercial, investment, relationship or other outcomes." },
       { title: "Engagement terms", text: "The scope, responsibilities, fees and commercial terms for any engagement are agreed separately in writing before substantive work begins." },
       { title: "Intellectual property", text: "Website copy, design and brand materials are owned by or licensed to Calyx Privé and may not be reproduced without permission." },
+      { title: "Contact", text: "Questions about these terms may be sent to concierge@calyx.global." },
     ],
   },
 };
@@ -107,16 +121,23 @@ export function generateStaticParams() {
   ].map((path) => ({ slug: path.split("/") }));
 }
 
-function InnerHero({ data }: { data: PageData }) {
-  return <section className={`innerHero ${data.image ? "imageHero" : ""}`}>{data.image && <Image src={data.image} alt="" fill priority sizes="100vw" />}<div className="innerShade" /><Header light={!!data.image} /><div className="wrap innerHeroContent"><Label>{data.eyebrow}</Label><h1>{data.title}</h1>{data.intro && <p>{data.intro}</p>}</div></section>;
-}
-
 function JourneyPage({ data }: { data: PageData }) {
-  return <><main><InnerHero data={data} /><section className="section detail"><div className="wrap detailGrid"><div><Label>01 / {data.eyebrow}</Label><h2>{data.sections?.[0].title}</h2></div><div><p>{data.sections?.[0].text}</p><div className="itemList">{data.items?.map(item => <span key={item}>{item}</span>)}</div></div></div></section><section className="section cta"><div className="wrap"><Label>Begin privately</Label><h2>Every journey starts<br />with understanding.</h2><Link className="button light" href="/private-enquiries">Request a Private Conversation</Link></div></section></main><Footer /></>;
+  return <><Header /><main>
+    <section className="page-hero">
+      <Image src={data.image!} alt={data.alt!} fill priority sizes="100vw" />
+      <div className="hero-wash" />
+      <div className="wrap page-hero-copy"><p className="eyebrow light">{data.eyebrow}</p><h1>{data.title}</h1><p>{data.intro}</p></div>
+    </section>
+    <section className="section wrap pathway-detail">
+      <div><p className="section-number">01 / {data.eyebrow}</p><h2>{data.sections?.[0].title}</h2></div>
+      <div><p className="large-copy">{data.sections?.[0].text}</p><div className="service-list">{data.items?.map((item,index) => <div key={item}><span>{String(index+1).padStart(2,"0")}</span><p>{item}</p></div>)}</div><p className="accent-copy">{data.accent}</p>{data.disclaimer && <p className="disclaimer">{data.disclaimer}</p>}</div>
+    </section>
+    <section className="cta section"><div className="wrap"><p className="eyebrow light">Begin privately</p><h2>Every journey starts<br />with understanding.</h2><Link className="button light" href="/private-enquiries">Request a Private Conversation</Link></div></section>
+  </main><Footer /></>;
 }
 
 function LegalPage({ data }: { data: PageData }) {
-  return <><main><InnerHero data={data} /><section className="section legal"><div className="wrap legalGrid">{data.sections?.map(section => <article key={section.title}><h2>{section.title}</h2><p>{section.text}</p></article>)}</div></section></main><Footer /></>;
+  return <><Header /><main><section className="legal-page wrap"><p className="eyebrow">{data.eyebrow}</p><h1>{data.title}</h1>{data.sections?.map(section => <section key={section.title}><h2>{section.title}</h2><p>{section.text}</p></section>)}</section></main><Footer /></>;
 }
 
 export default async function CatchAll({ params }: { params: Promise<{ slug: string[] }> }) {
