@@ -7,7 +7,23 @@ export function Header({ light = false }: { light?: boolean }) {
       <div className="headerInner wrap">
         <Link className="brand" href="/">CALYX <i>PRIVÉ</i></Link>
         <nav aria-label="Primary navigation">
-          <Link href="/">Home</Link><Link href="/#journey">The Journey</Link><Link href="/how-it-works">How It Works</Link><Link href="/about">About</Link>
+          <Link href="/">Home</Link>
+          <div className="journeyMenu">
+            <Link
+              className="journeyTrigger"
+              href="/#journey"
+              aria-haspopup="true"
+            >
+              The Journey
+            </Link>
+            <div className="journeyDropdown">
+              <Link href="/journey/health-wellbeing">Health &amp; Wellbeing</Link>
+              <Link href="/journey/technology-innovation">Technology &amp; Innovation</Link>
+              <Link href="/journey/culture-lifestyle">Culture &amp; Lifestyle</Link>
+              <Link href="/journey/relationships-opportunities">Relationships &amp; Opportunities</Link>
+            </div>
+          </div>
+          <Link href="/how-it-works">How It Works</Link><Link href="/about">About</Link>
           <Link className="navButton" href="/private-enquiries">Private Enquiries</Link>
         </nav>
       </div>

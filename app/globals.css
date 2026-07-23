@@ -12,9 +12,39 @@ a { color:inherit; text-decoration:none; }
 .headerInner { height:92px; display:flex; align-items:center; justify-content:space-between; }
 .brand { font-size:15px; font-weight:700; letter-spacing:.16em; white-space:nowrap; }
 .brand i { font-family:Didot,"Bodoni 72","Times New Roman",serif; font-weight:400; letter-spacing:.05em; }
-nav { display:flex; align-items:center; gap:37px; font-size:11px; text-transform:uppercase; letter-spacing:.12em; }
+nav { height:100%; display:flex; align-items:center; gap:37px; font-size:11px; text-transform:uppercase; letter-spacing:.12em; }
 nav a { transition:opacity .2s; }
 nav a:hover { opacity:.6; }
+.journeyMenu { position:relative; height:100%; display:flex; align-items:center; }
+.journeyTrigger { display:flex; align-items:center; height:100%; }
+.journeyDropdown {
+  position:absolute;
+  z-index:30;
+  top:100%;
+  left:-32px;
+  width:320px;
+  padding:24px 32px 28px;
+  background:#352f2d;
+  color:#fff;
+  box-shadow:0 24px 45px rgba(28,24,22,.22);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-6px);
+  transition:opacity .18s ease, transform .18s ease, visibility .18s;
+}
+.journeyDropdown a {
+  display:block;
+  padding:8px 0;
+  font-size:12px;
+  line-height:1.45;
+  letter-spacing:.12em;
+}
+.journeyMenu:hover .journeyDropdown,
+.journeyMenu:focus-within .journeyDropdown {
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
 .navButton,.button { border:1px solid currentColor; padding:14px 23px; display:inline-flex; align-items:center; text-transform:uppercase; letter-spacing:.1em; font-size:10px; font-weight:600; }
 .hero { position:relative; min-height:920px; color:white; overflow:hidden; }
 .hero > img { object-fit:cover; object-position:center; }
@@ -99,6 +129,7 @@ form .button { align-self:flex-start; background:none; color:var(--ink); cursor:
 @media (max-width: 900px) {
   .wrap { width:min(100% - 40px, 680px); }
   nav a:not(.navButton) { display:none; }
+  .journeyMenu { display:none; }
   .headerInner { height:74px; }
   .hero { min-height:760px; }
   .heroContent { padding-top:230px; }
