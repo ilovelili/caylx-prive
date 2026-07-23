@@ -270,6 +270,20 @@ h2 { margin:2rem 0 3rem; font-size:clamp(3rem,5.1vw,6rem); line-height:.98; }
 .cta { background:var(--clay); color:#fff; }
 .cta h2 { margin-bottom:2rem; }
 .cta p:not(.eyebrow) { color:#ffffffb3; margin-bottom:2rem; }
+.plain-hero { padding-top:13rem; padding-bottom:7rem; }
+.plain-hero>p:last-child { color:var(--muted); width:min(690px,90%); font-size:1.08rem; }
+.plain-hero h1 { margin:1.8rem 0 2rem; font-size:clamp(4rem,7vw,7.5rem); line-height:.91; }
+.stage-list article { border-top:1px solid var(--line); grid-template-columns:6rem 1fr 1fr; gap:2rem; padding:2rem 0; display:grid; }
+.stage-list article:last-child { border-bottom:1px solid var(--line); }
+.stage-list span { color:var(--clay); }
+.stage-list h2 { margin:0; font-size:2rem; }
+.stage-list p { color:var(--muted); }
+.faq { max-width:1000px; }
+.faq details { border-top:1px solid var(--line); padding:1.4rem 0; }
+.faq details:last-child { border-bottom:1px solid var(--line); }
+.faq summary { cursor:pointer; font-family:Didot,"Bodoni 72","Times New Roman",serif; font-size:1.45rem; }
+.faq details p { max-width:760px; color:var(--muted); padding-top:1rem; }
+body:has(.plain-hero) .site-header { background:var(--deep); }
 .footer-grid { grid-template-columns:1fr 1fr; gap:6rem; display:grid; }
 .footer-grid p,.footer-grid a { color:#ffffff9e; font-size:.82rem; }
 .footer-links { grid-template-columns:1fr 1fr; gap:.5rem; display:grid; }
@@ -289,6 +303,8 @@ footer { color:#fff; background:#25211f; padding:5rem 0 2rem; }
   .understanding-section .body-copy+.body-copy { grid-area:3/2; margin-top:1.15rem; }
   .about-preview .editorial-split { align-items:center; }
   .about-preview .body-lead { margin-bottom:2.25rem; }
+  .plain-hero>p:last-child { width:min(1100px,100%); }
+  .faq { width:min(1380px,90vw); max-width:none; }
   .process-grid article:first-child,.principle-grid article:first-child { padding-left:2rem; }
 }
 @media (min-width:901px) and (hover:hover) {
@@ -304,6 +320,8 @@ footer { color:#fff; background:#25211f; padding:5rem 0 2rem; }
   .pathway-grid { grid-template-columns:1fr; gap:5rem; }
   .process-grid,.principle-grid { grid-template-columns:1fr 1fr; }
   .process-grid article:nth-child(2),.principle-grid article:nth-child(2) { border-right:0; }
+  .stage-list article { grid-template-columns:3rem 1fr; }
+  .stage-list p { grid-column:2; }
   .hero-copy { margin-left:auto; }
   .hero-copy>p:not(.eyebrow) { width:100%; }
   .footer-grid { grid-template-columns:1fr; }

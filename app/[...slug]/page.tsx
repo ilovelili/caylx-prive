@@ -86,6 +86,17 @@ const process = [
   ["Follow-up", "Maintain context and coordinate appropriate continuity after the journey."],
 ];
 
+const questions = [
+  ["Is Calyx Privé a travel agency?", "No. Calyx Privé curates access, facilitates relationships and coordinates the wider journey. Regulated travel services may be delivered by approved specialist providers where required."],
+  ["Does Calyx Privé offer fixed itineraries?", "No. Every engagement begins with understanding the client’s objectives before an appropriate pathway is designed."],
+  ["Can Calyx Privé arrange medical treatment?", "Calyx Privé may facilitate introductions and practical coordination. All medical advice, diagnosis and treatment remain the responsibility of licensed healthcare providers."],
+  ["How are introductions handled?", "Introductions are considered individually and proceed only where there is relevance, mutual interest and permission from all appropriate parties."],
+  ["Is the service available only through referral?", "Many relationships begin through referral or invitation. Direct confidential enquiries from suitable prospective clients or their advisers are also considered."],
+  ["Can family offices and trusted advisers make enquiries on behalf of clients?", "Yes. Calyx Privé may work directly with individuals, families, family offices and trusted professional advisers."],
+  ["How far in advance should an enquiry be made?", "As early as reasonably possible. The time required depends on the nature of the request, access requirements and the level of coordination involved."],
+  ["Are fees agreed before work begins?", "Yes. The proposed scope, responsibilities and commercial terms are confirmed before substantive work begins."],
+];
+
 export function generateStaticParams() {
   return [
     ...Object.keys(journeys),
@@ -113,7 +124,12 @@ export default async function CatchAll({ params }: { params: Promise<{ slug: str
   if (journeys[path]) return <JourneyPage data={journeys[path]} />;
   if (legal[path]) return <LegalPage data={legal[path]} />;
   if (path === "about") return <><main><InnerHero data={{ eyebrow:"Behind every journey", title:"Built on trusted relationships. Delivered personally." }} /><section className="section detail"><div className="wrap detailGrid"><div><Label>Katie Kong</Label><h2>Founder &amp;<br />Managing Director</h2></div><div><p>Calyx Privé is the private-client division of Calyx, a cross-border strategic access platform connecting trusted partners across China, the Gulf, Africa and beyond.</p><p>For more than 15 years, Katie Kong has worked across China, Europe and the Middle East, helping entrepreneurs, business leaders and institutions build trusted relationships across cultures.</p><p>As Calyx evolved, clients increasingly sought something beyond commercial opportunities. They wanted a trusted partner to help them navigate China itself—with discretion and confidence.</p></div></div></section></main><Footer /></>;
-  if (path === "how-it-works") return <><main><InnerHero data={{ eyebrow:"How it works", title:"A discreet process holds every journey.", intro:"Personal coordination brings clarity to complex requests without turning the relationship into a fixed programme." }} /><section className="section"><div className="wrap processList">{process.map(([title,text],i)=><article key={title}><small>{String(i+1).padStart(2,"0")}</small><h2>{title}</h2><p>{text}</p></article>)}</div></section></main><Footer /></>;
+  if (path === "how-it-works") return <><Header /><main>
+    <section className="plain-hero wrap"><p className="eyebrow">How it works</p><h1>A discreet process holds<br />every journey.</h1><p>Personal coordination brings clarity to complex requests without turning the relationship into a fixed programme.</p></section>
+    <section className="section warm"><div className="wrap stage-list">{process.map(([title,text],i)=><article key={title}><span>{String(i+1).padStart(2,"0")}</span><h2>{title}</h2><p>{text}</p></article>)}</div></section>
+    <section className="section wrap faq"><p className="section-number">Questions, considered</p><h2>Before a private conversation.</h2>{questions.map(([question,answer])=><details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</section>
+    <section className="cta section"><div className="wrap"><h2>Begin with a private conversation.</h2><Link href="/private-enquiries" className="button light">Private Enquiries</Link></div></section>
+  </main><Footer /></>;
   if (path === "private-enquiries") return <><main><InnerHero data={{ eyebrow:"Private enquiries", title:"Begin with a private conversation.", intro:"Every engagement begins with an understanding of the individual, the purpose of the journey and the level of support required." }} /><section className="section enquiry"><div className="wrap detailGrid"><div><h2>Every enquiry is personally reviewed.</h2><p>Calyx Privé accepts a limited number of engagements each year, ensuring every client receives personal attention from beginning to end.</p></div><form action="mailto:concierge@calyx.global" method="post" encType="text/plain"><label>Name<input name="name" required /></label><label>Email<input name="email" type="email" required /></label><label>Country of residence<input name="country" /></label><label>How may we help?<textarea name="message" rows={5} required /></label><button className="button" type="submit">Send Private Enquiry</button><p className="finePrint">Please do not submit confidential medical, financial or highly sensitive personal information through this form.</p></form></div></section></main><Footer /></>;
   notFound();
 }
