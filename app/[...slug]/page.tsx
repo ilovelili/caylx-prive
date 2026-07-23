@@ -123,7 +123,23 @@ export default async function CatchAll({ params }: { params: Promise<{ slug: str
   const path = (await params).slug.join("/");
   if (journeys[path]) return <JourneyPage data={journeys[path]} />;
   if (legal[path]) return <LegalPage data={legal[path]} />;
-  if (path === "about") return <><main><InnerHero data={{ eyebrow:"Behind every journey", title:"Built on trusted relationships. Delivered personally." }} /><section className="section detail"><div className="wrap detailGrid"><div><Label>Katie Kong</Label><h2>Founder &amp;<br />Managing Director</h2></div><div><p>Calyx Privé is the private-client division of Calyx, a cross-border strategic access platform connecting trusted partners across China, the Gulf, Africa and beyond.</p><p>For more than 15 years, Katie Kong has worked across China, Europe and the Middle East, helping entrepreneurs, business leaders and institutions build trusted relationships across cultures.</p><p>As Calyx evolved, clients increasingly sought something beyond commercial opportunities. They wanted a trusted partner to help them navigate China itself—with discretion and confidence.</p></div></div></section></main><Footer /></>;
+  if (path === "about") return <><Header /><main>
+    <section className="plain-hero wrap"><p className="eyebrow">Behind every journey</p><h1>Built on trusted relationships.<br />Delivered personally.</h1></section>
+    <section className="section wrap founder">
+      <div className="founder-image"><Image src="/images/calyx-prive/katie-kong.jpg" alt="Katie Kong, Founder and Managing Director of Calyx and Calyx Privé" fill priority sizes="(max-width:800px) 100vw, 40vw" /></div>
+      <div className="founder-copy">
+        <p className="eyebrow">Katie Kong</p>
+        <p className="founder-title">Founder &amp; Managing Director<br />Calyx &amp; Calyx Privé</p>
+        <p className="body-lead founder-intro">Calyx Privé is the private-client division of Calyx, a cross-border strategic access platform connecting trusted partners across China, the Gulf, Africa and beyond.</p>
+        <p>For more than 15 years, Katie Kong has worked across China, Europe and the Middle East, helping entrepreneurs, business leaders and institutions build trusted relationships across cultures. Her career spans investment banking, strategic advisory and international business development, giving her a rare perspective on how meaningful access is created through trust, cultural understanding and long-term relationships.</p>
+        <p>As Calyx evolved, clients increasingly sought something beyond commercial opportunities. They wanted a trusted partner to help them navigate China itself—its healthcare, innovation, culture and relationships—with discretion and confidence.</p>
+        <p>Calyx Privé was created as a natural extension of that work. Today, every engagement is personally designed and overseen by Katie.</p>
+        <blockquote>The most valuable access is built on trust, context and personal relationships.</blockquote>
+        <ul className="credentials"><li>15+ years of cross-border experience across China, Europe and the Middle East</li><li>Former investment banking professional advising on cross-border transactions</li><li>Executive education at Mannheim Business School, Germany</li><li>Relationships across healthcare, technology, industry and family enterprises</li><li>Personally oversees every Calyx Privé engagement</li></ul>
+        <Link href="/private-enquiries" className="button">Begin a Private Conversation</Link>
+      </div>
+    </section>
+  </main><Footer /></>;
   if (path === "how-it-works") return <><Header /><main>
     <section className="plain-hero wrap"><p className="eyebrow">How it works</p><h1>A discreet process holds<br />every journey.</h1><p>Personal coordination brings clarity to complex requests without turning the relationship into a fixed programme.</p></section>
     <section className="section warm"><div className="wrap stage-list">{process.map(([title,text],i)=><article key={title}><span>{String(i+1).padStart(2,"0")}</span><h2>{title}</h2><p>{text}</p></article>)}</div></section>
