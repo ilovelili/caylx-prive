@@ -130,6 +130,26 @@ export default async function CatchAll({ params }: { params: Promise<{ slug: str
     <section className="section wrap faq"><p className="section-number">Questions, considered</p><h2>Before a private conversation.</h2>{questions.map(([question,answer])=><details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</section>
     <section className="cta section"><div className="wrap"><h2>Begin with a private conversation.</h2><Link href="/private-enquiries" className="button light">Private Enquiries</Link></div></section>
   </main><Footer /></>;
-  if (path === "private-enquiries") return <><main><InnerHero data={{ eyebrow:"Private enquiries", title:"Begin with a private conversation.", intro:"Every engagement begins with an understanding of the individual, the purpose of the journey and the level of support required." }} /><section className="section enquiry"><div className="wrap detailGrid"><div><h2>Every enquiry is personally reviewed.</h2><p>Calyx Privé accepts a limited number of engagements each year, ensuring every client receives personal attention from beginning to end.</p></div><form action="mailto:concierge@calyx.global" method="post" encType="text/plain"><label>Name<input name="name" required /></label><label>Email<input name="email" type="email" required /></label><label>Country of residence<input name="country" /></label><label>How may we help?<textarea name="message" rows={5} required /></label><button className="button" type="submit">Send Private Enquiry</button><p className="finePrint">Please do not submit confidential medical, financial or highly sensitive personal information through this form.</p></form></div></section></main><Footer /></>;
+  if (path === "private-enquiries") return <><Header /><main>
+    <section className="plain-hero wrap"><p className="eyebrow">Private enquiries</p><h1>Begin with a private<br />conversation.</h1><p>Every engagement begins with an understanding of the individual, the purpose of the journey and the level of support required.</p></section>
+    <section className="section warm"><div className="wrap enquiry-layout">
+      <div className="enquiry-intro"><p className="body-lead">Calyx Privé accepts a limited number of engagements each year, ensuring every client receives personal attention from beginning to end.</p><p>Relationships typically begin through referral, invitation or a confidential introductory conversation.</p><p>Every enquiry is personally reviewed to ensure that the client’s objectives align with the nature of our work and the relationships we cultivate.</p><a className="email-link" href="mailto:concierge@calyx.global">concierge@calyx.global</a></div>
+      <form className="enquiry-form" noValidate>
+        <label>Full name<input autoComplete="name" required name="name" /></label>
+        <label>Email address<input type="email" autoComplete="email" required name="email" /></label>
+        <label>Telephone or WhatsApp<input type="tel" autoComplete="tel" required name="phone" /></label>
+        <label>Country of residence<input autoComplete="country-name" required name="country" /></label>
+        <label>Enquiring as<select name="enquiringAs" required defaultValue=""><option value="" disabled>Select one</option><option>Individual</option><option>Family member</option><option>Family office</option><option>Trusted adviser</option><option>Other</option></select></label>
+        <label>Area of interest<select name="interest" required defaultValue=""><option value="" disabled>Select one</option><option>Health &amp; Wellbeing</option><option>Technology &amp; Innovation</option><option>Culture &amp; Lifestyle</option><option>Relationships &amp; Opportunities</option><option>Multiple pathways</option></select></label>
+        <label>Approximate timing<input placeholder="For example, October 2026" name="timing" /></label>
+        <label>Number of travellers, if relevant<input type="number" min="1" name="travellers" /></label>
+        <label>Preferred method of contact<select name="contact" defaultValue="Email"><option>Email</option><option>Telephone</option><option>WhatsApp</option></select></label>
+        <label className="full">Message<textarea name="message" rows={6} required /></label>
+        <p className="form-warning full">Please do not submit confidential medical, financial or highly sensitive personal information through this form. Where appropriate, sensitive information will be requested through a secure private channel after initial contact.</p>
+        <label className="consent full"><input type="checkbox" required /> <span>I consent to Calyx Privé using this information to respond to my enquiry and have read the Privacy Policy.</span></label>
+        <button className="button full" type="submit">Send Private Enquiry</button>
+      </form>
+    </div></section>
+  </main><Footer /></>;
   notFound();
 }
