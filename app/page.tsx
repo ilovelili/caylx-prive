@@ -61,7 +61,7 @@ export default function Home() {
           <Header light />
           <div className="hero-copy wrap reveal">
             <p className="eyebrow light">China × Health × Culture × Innovation</p>
-            <h1>A deeper way<br />into China.</h1>
+            <h1 style={{ lineHeight: 0.98 }}>A deeper way<br />into China.</h1>
             <p>Privately coordinated access to China’s health, innovation, culture and relationships—created for a select group of ultra-high-net-worth individuals, families and family offices.</p>
             <div className="actions">
               <Link className="button light" href="/private-enquiries">Request a Private Conversation</Link>
